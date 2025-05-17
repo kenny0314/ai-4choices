@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AI & Future Jobs Quiz</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 700px;
+      background-color: rgba(0,0,0,0.7);
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 0 20px #00ffff;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 2em;
+      margin-bottom: 20px;
+    }
+
+    .question {
+      font-size: 1.2em;
+      margin-bottom: 20px;
+    }
+
+    .option-btn {
+      display: block;
+      width: 100%;
+      margin: 10px 0;
+      padding: 12px;
+      font-size: 1em;
+      background-color: #1f6f8b;
+      border: none;
+      color: white;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .option-btn:hover {
+      background-color: #99e1d9;
+      color: black;
+    }
+
+    #score-container {
+      display: none;
+      font-size: 1.5em;
+      margin-top: 20px;
+    }
+
+    .button-row {
+      margin-top: 30px;
+    }
+
+    .retry-btn, .back-btn {
+      margin: 10px;
+      padding: 10px 20px;
+      font-size: 1em;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .retry-btn {
+      background-color: #28a745;
+      color: white;
+    }
+
+    .retry-btn:hover {
+      background-color: #218838;
+    }
+
+    .back-btn {
+      background-color: #007bff;
+      color: white;
+    }
+
+    .back-btn:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>AI & Future Job Quiz</h1>
+    <div id="quiz-container">
+      <div id="question" class="question"></div>
+      <div id="options"></div>
+    </div>
+    <div id="score-container">
+      <div id="score-text"></div>
+      <div class="button-row">
+        <button class="retry-btn" onclick="restartQuiz()">Retry</button>
+        <button class="back-btn" onclick="goBack()">Go Back</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const quizData = [
+      {
+        question: "Which profession is most likely to be automated by AI in the near future?",
+        options: ["Software Engineer", "Data Analyst", "Telemarketer", "Doctor"],
+        answer: "Telemarketer"
+      },
+      {
+        question: "Which creative job is at low risk of being replaced by AI?",
+        options: ["Poet", "Taxi Driver", "Factory Worker", "Retail Cashier"],
+        answer: "Poet"
+      },
+      {
+        question: "Which factor makes a job less likely to be automated?",
+        options: ["High repetition", "Human empathy", "Low pay", "Short training time"],
+        answer: "Human empathy"
+      },
+      {
+        question: "What is a potential future job title in an AI-driven world?",
+        options: ["Robot Ethics Auditor", "Horse Carriage Mechanic", "CD Store Manager", "Chimney Sweep"],
+        answer: "Robot Ethics Auditor"
+      },
+      {
+        question: "Which task is AI currently least capable of doing?",
+        options: ["Driving a car", "Playing chess", "Creative storytelling", "Sorting mail"],
+        answer: "Creative storytelling"
+      }
+    ];
+
+    let currentQuestion = 0;
+    let score = 0;
+
+    const questionEl = document.getElementById("question");
+    const optionsEl = document.getElementById("options");
+    const scoreContainer = document.getElementById("score-container");
+    const scoreText = document.getElementById("score-text");
+
+    function loadQuestion() {
+      const q = quizData[currentQuestion];
+      questionEl.textContent = q.question;
+      optionsEl.innerHTML = "";
+
+      q.options.forEach(option => {
+        const btn = document.createElement("button");
+        btn.textContent = option;
+        btn.classList.add("option-btn");
+        btn.onclick = () => selectOption(option);
+        optionsEl.appendChild(btn);
+      });
+    }
+
+    function selectOption(selected) {
+      if (selected === quizData[currentQuestion].answer) {
+        score++;
+      }
+      currentQuestion++;
+      if (currentQuestion < quizData.length) {
+        loadQuestion();
+      } else {
+        showScore();
+      }
+    }
+
+    function showScore() {
+      document.getElementById("quiz-container").style.display = "none";
+      scoreContainer.style.display = "block";
+      scoreText.textContent = `Your AI Literacy Score: ${score} / ${quizData.length}`;
+    }
+
+    function restartQuiz() {
+      currentQuestion = 0;
+      score = 0;
+      document.getElementById("quiz-container").style.display = "block";
+      scoreContainer.style.display = "none";
+      loadQuestion();
+    }
+
+    function goBack() {
+      window.location.href = "https://new.express.adobe.com/webpage/NhRZcBILvQe4s";
+    }
+
+    // 初期化
+    loadQuestion();
+  </script>
+</body>
+</html>
